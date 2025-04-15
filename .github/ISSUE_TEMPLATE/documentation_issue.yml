@@ -1,0 +1,21 @@
+name: "\ud83d\udcdc Documentation issue"
+description: "Report a problem in the documentation"
+title: "[Docs] "
+labels: ["area:documentation"]
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: What's wrong or missing?
+      description: Describe what’s unclear, incorrect or incomplete
+      placeholder: "On the README line X..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: suggestion
+    attributes:
+      label: How could it be improved?
+      placeholder: "Maybe add an example of..."
+    validations:
+      required: false

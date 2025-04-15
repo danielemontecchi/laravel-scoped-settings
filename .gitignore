@@ -1,0 +1,47 @@
+# Composer dependencies
+/vendor
+
+# Laravel environment
+.env
+.env.*
+
+# PHPUnit / Pest
+.phpunit.result.cache
+
+# IDEs / Editors
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Node / Frontend (in caso ci sia una demo o docs con vite)
+node_modules/
+public/build/
+resources/js/build/
+resources/js/dist/
+
+# Logs & debug
+*.log
+storage/*.key
+
+# Coverage reports
+coverage/
+clover.xml
+coverage.xml
+build/coverage/
+
+# Package artifacts
+composer.lock
+vendor-bin/
+
+# Custom
+/.phpstorm.meta.php/
+
+/phpstan.cache
+/ecs.cache
+/psalm.xml
+/psalm-cache/

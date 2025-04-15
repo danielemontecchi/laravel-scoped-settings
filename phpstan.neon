@@ -1,0 +1,16 @@
+includes:
+    - vendor/nunomaduro/larastan/extension.neon
+
+parameters:
+    level: 5
+    paths:
+        - config
+        - src
+
+    # Assicura la comprensione dei helper Laravel
+    bootstrapFiles:
+        - tests/bootstrap.php
+
+    # Directory dove Larastan troverà le classi Laravel
+    scanFiles:
+        - config/laravel-scoped-settings.php

@@ -1,0 +1,21 @@
+name: "\u2753 Usage question"
+description: "Ask for help with using the package"
+title: "[Question] "
+labels: ["type:enhancement"]
+body:
+  - type: textarea
+    id: question
+    attributes:
+      label: What would you like help with?
+      description: Please explain your doubt as clearly as possible
+      placeholder: "How can I use this with scoped settings for teams?"
+    validations:
+      required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: Package version
+      placeholder: "e.g. 1.0.0"
+    validations:
+      required: false

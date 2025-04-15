@@ -1,0 +1,48 @@
+{
+  "name": "danielemontecchi/laravel-scoped-settings",
+  "description": "Scoped settings manager for Laravel models.",
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Daniele Montecchi",
+      "email": "daniele@montecchi.me"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "DanieleMontecchi\\LaravelScopedSettings\\": "src/",
+      "Tests\\": "tests/"
+    }
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "DanieleMontecchi\\LaravelScopedSettings\\LaravelScopedSettingsServiceProvider"
+      ],
+      "aliases": {
+        "Settings": "DanieleMontecchi\\LaravelScopedSettings\\Facades\\Settings"
+      }
+    }
+  },
+  "require": {
+    "php": "^8.1",
+    "illuminate/support": "^10.0 || ^11.0 || ^12.0"
+  },
+  "minimum-stability": "stable",
+  "prefer-stable": true,
+  "require-dev": {
+    "pestphp/pest": "^3.8",
+    "orchestra/testbench": "^10.2",
+    "phpstan/phpstan": "^2.1",
+    "nunomaduro/larastan": "^3.3"
+  },
+  "config": {
+    "allow-plugins": {
+      "pestphp/pest-plugin": true
+    }
+  },
+  "scripts": {
+    "phpstan": "phpstan analyse"
+  }
+}
