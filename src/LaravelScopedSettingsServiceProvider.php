@@ -2,13 +2,13 @@
 
 namespace DanieleMontecchi\LaravelScopedSettings;
 
+use DanieleMontecchi\LaravelScopedSettings\Managers\SettingsManager;
 use Illuminate\Support\ServiceProvider;
 
 class LaravelScopedSettingsServiceProvider extends ServiceProvider
 {
     public function boot(): void
     {
-        // Pubblica il file di configurazione
         $this->publishes([
             __DIR__ . '/../config/laravel-scoped-settings.php' => config_path('laravel-scoped-settings.php'),
         ], 'config');
@@ -16,7 +16,10 @@ class LaravelScopedSettingsServiceProvider extends ServiceProvider
 
     public function register(): void
     {
-        // Unisci la configurazione del pacchetto con quella dell'app
+        $this->app->singleton('scoped-settings', function ($app) {
+            return new SettingsManager($app);
+        });
+
         $this->mergeConfigFrom(
             __DIR__ . '/../config/laravel-scoped-settings.php',
             'laravel-scoped-settings'

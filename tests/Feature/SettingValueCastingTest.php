@@ -1,13 +1,15 @@
 <?php
 
 use DanieleMontecchi\LaravelScopedSettings\Models\Setting;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Schema;
-
-use function Pest\Laravel\artisan;
 
 beforeEach(function () {
     if (!Schema::hasTable('settings')) {
-        artisan('migrate', ['--path' => 'vendor/danielemontecchi/laravel-scoped-settings/database/migrations']);
+        Artisan::call('migrate', ['--path' => 'vendor/danielemontecchi/laravel-scoped-settings/database/migrations']);
+    }
+    if (!Schema::hasTable('test_users')) {
+        Artisan::call('migrate', ['--path' => 'vendor/danielemontecchi/laravel-scoped-settings/tests/database/migrations']);
     }
 });
 
