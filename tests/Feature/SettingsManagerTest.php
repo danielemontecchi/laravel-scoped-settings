@@ -60,3 +60,45 @@ it('can retrieve a group of settings scoped to a model', function () {
         'default.currency' => 'EUR',
     ]);
 });
+
+it('can clear scope and retrieve global settings', function () {
+    $user = TestUser::create(['id' => 1, 'name' => 'Daniele']);
+
+    Setting::for($user)->set('timezone', 'Europe/Rome');
+    Setting::forGlobal()->set('timezone', 'UTC');
+
+    expect(Setting::for($user)->get('timezone'))->toBe('Europe/Rome')
+        ->and(Setting::forGlobal()->get('timezone'))->toBe('UTC');
+});
+
+it('uses global settings when no scope is defined', function () {
+    Setting::forGlobal()->set('currency', 'USD');
+
+    expect(Setting::get('currency'))->toBe('USD');
+});
+
+it('can use scoping with anonymous model', function () {
+    $model = new class {
+        public function getKey()
+        {
+            return 999;
+        }
+    };
+
+    Setting::for($model)->set('color', 'blue');
+
+    expect(Setting::for($model)->get('color'))->toBe('blue');
+});
+
+it('stores same key with different values per scope', function () {
+    $user1 = TestUser::create(['id' => 1, 'name' => 'Alice']);
+    $user2 = TestUser::create(['id' => 2, 'name' => 'Bob']);
+
+    Setting::for($user1)->set('theme', 'light');
+    Setting::for($user2)->set('theme', 'dark');
+    Setting::forGlobal()->set('theme', 'system');
+
+    expect(Setting::for($user1)->get('theme'))->toBe('light')
+        ->and(Setting::for($user2)->get('theme'))->toBe('dark')
+        ->and(Setting::forGlobal()->get('theme'))->toBe('system');
+});

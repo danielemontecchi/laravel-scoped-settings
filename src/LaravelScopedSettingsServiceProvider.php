@@ -16,7 +16,7 @@ class LaravelScopedSettingsServiceProvider extends ServiceProvider
 
     public function register(): void
     {
-        $this->app->singleton('scoped-settings', function ($app) {
+        $this->app->singleton('laravel-scoped-settings', function ($app) {
             return new SettingsManager($app);
         });
 

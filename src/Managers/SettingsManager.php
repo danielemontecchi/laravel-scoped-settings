@@ -7,23 +7,19 @@ use Illuminate\Support\Str;
 
 class SettingsManager
 {
-    protected ?object $scope = null;
+    protected ?string $scopeType = null;
+    protected ?int $scopeId = null;
 
     /**
-     * Define a model to scope settings to (ex. User)
+     * Scope settings to a specific model (e.g. user, team, etc.).
      */
     public function for(object $model): static
     {
-        $this->scope = $model;
+        $clone = clone $this;
+        $clone->scopeType = get_class($model);
+        $clone->scopeId = method_exists($model, 'getKey') ? $model->getKey() : null;
 
-        return $this;
-    }
-
-    public function clearScope(): static
-    {
-        $this->scope = null;
-
-        return $this;
+        return $clone;
     }
 
     public function get(string $key, mixed $default = null): mixed
@@ -31,9 +27,7 @@ class SettingsManager
         [$group, $key] = $this->parseKey($key);
 
         $setting = Setting::query()
-            ->when($this->scope, fn($q) => $q
-                ->where('scope_type', get_class($this->scope))
-                ->where('scope_id', $this->scope->getKey()))
+            ->where($this->getScopeConditions())
             ->where('group', $group)
             ->where('key', $key)
             ->first();
@@ -46,8 +40,8 @@ class SettingsManager
         [$group, $key] = $this->parseKey($key);
 
         Setting::updateOrCreate([
-            'scope_type' => $this->scope ? get_class($this->scope) : null,
-            'scope_id' => $this->scope?->getKey(),
+            'scope_type' => $this->scopeType,
+            'scope_id' => $this->scopeId,
             'group' => $group,
             'key' => $key,
         ], [
@@ -60,9 +54,7 @@ class SettingsManager
         [$group, $key] = $this->parseKey($key);
 
         Setting::query()
-            ->when($this->scope, fn($q) => $q
-                ->where('scope_type', get_class($this->scope))
-                ->where('scope_id', $this->scope->getKey()))
+            ->where($this->getScopeConditions())
             ->where('group', $group)
             ->where('key', $key)
             ->delete();
@@ -71,9 +63,7 @@ class SettingsManager
     public function all(): array
     {
         return Setting::query()
-            ->when($this->scope, fn($q) => $q
-                ->where('scope_type', get_class($this->scope))
-                ->where('scope_id', $this->scope->getKey()))
+            ->where($this->getScopeConditions())
             ->get()
             ->mapWithKeys(fn($setting) => [$setting->group . '.' . $setting->key => $setting->value])
             ->toArray();
@@ -82,13 +72,19 @@ class SettingsManager
     public function group(string $group): array
     {
         return Setting::query()
-            ->when($this->scope, fn($q) => $q
-                ->where('scope_type', get_class($this->scope))
-                ->where('scope_id', $this->scope->getKey()))
+            ->where($this->getScopeConditions())
             ->where('group', $group)
             ->get()
             ->mapWithKeys(fn($setting) => [$setting->key => $setting->value])
             ->toArray();
+    }
+
+    protected function getScopeConditions(): array
+    {
+        return [
+            'scope_type' => $this->scopeType,
+            'scope_id' => $this->scopeId,
+        ];
     }
 
     protected function parseKey(string $fullKey): array
@@ -97,4 +93,19 @@ class SettingsManager
             ? explode('.', $fullKey, 2)
             : ['default', $fullKey];
     }
+
+    public function clearScope(): static
+    {
+        $this->scopeId = null;
+        $this->scopeType = null;
+
+        return $this;
+    }
+
+    public function forGlobal(): static
+    {
+        return $this->clearScope();
+    }
+
+
 }
