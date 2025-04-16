@@ -1,0 +1,40 @@
+name: Deploy versioned documentation
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  deploy-docs:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Install MkDocs and Mike
+        run: pip install mkdocs mkdocs-material mike
+
+      - name: Get version from tag
+        id: get_version
+        run: echo "VERSION=${GITHUB_REF#refs/tags/v}" >> $GITHUB_ENV
+
+      - name: Configure Git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Inject version warnings
+        run: bash ./prepare-docs.sh
+
+      - name: Deploy documentation with mike
+        run: |
+          mike deploy --push --update-aliases "$VERSION" latest
+        env:
+          VERSION: ${{ env.VERSION }}

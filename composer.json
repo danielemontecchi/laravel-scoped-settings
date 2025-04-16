@@ -1,14 +1,26 @@
 {
   "name": "danielemontecchi/laravel-scoped-settings",
-  "description": "Scoped settings manager for Laravel models.",
+  "description": "A Laravel package for global and model-scoped application settings.",
+  "keywords": [
+    "laravel",
+    "settings",
+    "scoped",
+    "model",
+    "configuration"
+  ],
   "type": "library",
   "license": "MIT",
   "authors": [
     {
       "name": "Daniele Montecchi",
-      "email": "daniele@montecchi.me"
+      "email": "daniele@montecchi.me",
+      "homepage": "https://github.com/danielemontecchi"
     }
   ],
+  "support": {
+    "issues": "https://github.com/danielemontecchi/laravel-scoped-settings/issues",
+    "source": "https://github.com/danielemontecchi/laravel-scoped-settings"
+  },
   "autoload": {
     "psr-4": {
       "DanieleMontecchi\\LaravelScopedSettings\\": "src/",
@@ -43,6 +55,8 @@
     }
   },
   "scripts": {
-    "phpstan": "phpstan analyse"
+    "test": "pest",
+    "lint": "phpstan analyse --memory-limit=512M",
+    "docs": "./prepare-docs.sh"
   }
 }

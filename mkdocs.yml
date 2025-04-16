@@ -1,0 +1,50 @@
+site_name: Laravel Scoped Settings
+site_url: https://danielemontecchi.github.io/laravel-scoped-settings/
+
+repo_url: https://github.com/danielemontecchi/laravel-scoped-settings
+repo_name: danielemontecchi/laravel-scoped-settings
+
+nav:
+  - Home: index.md
+  - Installation: installation.md
+  - Usage: usage.md
+  - Scoping: scoping.md
+  - Artisan Commands: artisan.md
+  - API Reference: api.md
+  - Changelog: changelog.md
+
+theme:
+  name: material
+  palette:
+    primary: blue
+    accent: light blue
+  features:
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.sections
+    - navigation.top
+    - version
+    - content.code.copy
+    - navigation.footer
+    - toc.integrate
+    - header.autohide
+    - navigation.instant
+
+markdown_extensions:
+  - admonition
+  - toc:
+      permalink: true
+  - pymdownx.snippets
+  - pymdownx.highlight
+  - pymdownx.superfences
+
+plugins:
+  - search
+  - mike
+
+extra:
+  version:
+    provider: mike
+    default: latest
+    alias:
+      latest: "Latest"
