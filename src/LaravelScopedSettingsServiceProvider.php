@@ -12,16 +12,22 @@ class LaravelScopedSettingsServiceProvider extends ServiceProvider
 {
     public function boot(): void
     {
+        // Config
         $this->publishes([
             __DIR__ . '/../config/laravel-scoped-settings.php' => config_path('laravel-scoped-settings.php'),
         ], 'config');
+
+        // Migrations
+        $this->publishes([
+            __DIR__ . '/../database/migrations' => database_path('migrations'),
+        ], 'laravel-scoped-settings-migrations');
 
         $this->loadMigrationsFrom([
             __DIR__ . '/../database/migrations',
             __DIR__ . '/../tests/database/migrations',
         ]);
 
-        // Carica helper se esiste
+        // Helpers
         if (file_exists(__DIR__ . '/Support/helpers.php')) {
             require_once __DIR__ . '/Support/helpers.php';
         }

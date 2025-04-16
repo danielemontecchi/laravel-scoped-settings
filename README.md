@@ -29,7 +29,7 @@ composer require danielemontecchi/laravel-scoped-settings
 To publish and run the migrations:
 
 ```bash
-php artisan vendor:publish --tag="scoped-settings-migrations"
+php artisan vendor:publish --tag="laravel-scoped-settings-migrations"
 php artisan migrate
 ```
 
