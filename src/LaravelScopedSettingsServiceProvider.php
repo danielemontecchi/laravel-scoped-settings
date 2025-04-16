@@ -2,6 +2,9 @@
 
 namespace DanieleMontecchi\LaravelScopedSettings;
 
+use DanieleMontecchi\LaravelScopedSettings\Commands\ClearSettingsCommand;
+use DanieleMontecchi\LaravelScopedSettings\Commands\DumpSettingsCommand;
+use DanieleMontecchi\LaravelScopedSettings\Commands\ListSettingsCommand;
 use DanieleMontecchi\LaravelScopedSettings\Managers\SettingsManager;
 use Illuminate\Support\ServiceProvider;
 
@@ -32,5 +35,11 @@ class LaravelScopedSettingsServiceProvider extends ServiceProvider
             __DIR__ . '/../config/laravel-scoped-settings.php',
             'laravel-scoped-settings'
         );
+
+        $this->commands([
+            ListSettingsCommand::class,
+            ClearSettingsCommand::class,
+            DumpSettingsCommand::class,
+        ]);
     }
 }
