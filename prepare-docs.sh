@@ -19,7 +19,7 @@ for dir in "$VERSIONED_DIR"/*; do
   if [[ -d "$dir" && "$dir" != *"latest"* && "$(basename "$dir")" != .* ]]; then
     echo "📁 Processing directory: $dir"
     for file in "$dir"/*.md; do
-      if ! grep -Fxq "$INCLUDE" "$file"; then
+      if ! LC_ALL=C grep -Fqx -- "$INCLUDE" "$file"; then
         echo "➕ Adding banner to: $file"
         tmpfile=$(mktemp)
         echo "$INCLUDE" > "$tmpfile"

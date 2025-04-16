@@ -10,6 +10,14 @@ Alias for the most recent stable version of the documentation.
 
 ---
 
+## [v1.0.1](https://danielemontecchi.github.io/laravel-scoped-settings/1.0.1/) – 2025-04-16
+
+### 🔧 Fixes & Improvements
+
+- Fixed GitHub Actions permissions to allow `gh-pages` deployment via `GH_TOKEN`
+- Enhanced `prepare-docs.sh` compatibility by fixing unsupported grep usage
+- Documentation deploy now fully automated on new tags via `mike deploy`
+
 ## [v1.0.0](https://danielemontecchi.github.io/laravel-scoped-settings/1.0.0/) – 2025-04-16
 
 ### ✨ Features

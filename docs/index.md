@@ -52,6 +52,7 @@ Use Laravel Scoped Settings when you need to:
 - [Scoping Settings](scoping.md)
 - [Artisan Commands](artisan.md)
 - [API Reference](api.md)
+- [Changelog](changelog.md)
 
 ---
 

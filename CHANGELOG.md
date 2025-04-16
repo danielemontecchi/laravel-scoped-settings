@@ -6,6 +6,13 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 
 ---
 
+## [v1.0.1] - 2025-04-16
+
+### Changed
+
+- Fix GitHub Actions deploy: configurazione corretta per push su branch `gh-pages` tramite token
+- Piccole ottimizzazioni nel deploy script (`prepare-docs.sh`)
+
 ## [1.0.0] - 2025-04-16
 
 ### Added

@@ -27,8 +27,9 @@ jobs:
 
       - name: Configure Git
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git remote set-url origin https://danielemontecchi:${{ secrets.GH_TOKEN }}@github.com/danielemontecchi/laravel-scoped-settings.git
 
       - name: Inject version warnings
         run: bash ./prepare-docs.sh
