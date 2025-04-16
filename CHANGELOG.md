@@ -6,24 +6,21 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 
 ---
 
-## [v1.0.2] – 2025-04-16
+## v1.0.2 – 2025-04-16
 
-### ✨ Added
+### Added
 
-- `has($key)` method to check whether a key is explicitly stored in the current scope
+- `has($key)` method to check if a setting exists.
+- `flush()` method to delete all scoped settings for a model.
 
-### 📘 Docs
-
-- Updated `api.md`, `usage.md`, and `README.md` with examples and explanation
-
-## [v1.0.1] - 2025-04-16
+## v1.0.1 - 2025-04-16
 
 ### Changed
 
 - Fix GitHub Actions deploy: configurazione corretta per push su branch `gh-pages` tramite token
 - Piccole ottimizzazioni nel deploy script (`prepare-docs.sh`)
 
-## [v1.0.0] - 2025-04-16
+## v1.0.0 - 2025-04-16
 
 ### Added
 

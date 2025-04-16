@@ -60,6 +60,13 @@ class SettingsManager
             ->delete();
     }
 
+    public function flush(): void
+    {
+        Setting::query()
+            ->where($this->getScopeConditions())
+            ->delete();
+    }
+
     public function has(string $key): bool
     {
         [$group, $key] = $this->parseKey($key);

@@ -36,16 +36,28 @@ setting()->forget('app.locale');
 
 ---
 
-## `has(string $key): bool`
+### `has(string $key): bool`
 
-Checks whether a key has been explicitly set in the current scope.
-
-Returns `true` only if the setting exists in storage, not if a fallback is used.
+Check if a setting exists for the given key. This method respects the current scope (global or model).
 
 ```php
-if (setting()->has('ui.theme')) {
-    // the setting exists
-}
+setting()->has('app.debug'); // true or false
+setting()->for($user)->has('notifications.enabled'); // true or false
+```
+
+Useful for conditional logic based on whether a setting has been stored or overridden.
+
+---
+
+### `flush(): void`
+
+Delete all settings associated with the current scope. It is useful for resetting settings for a specific model.
+
+```php
+setting()->for($user)->flush();
+```
+
+This will remove all keys stored for the provided scope (e.g., the `$user` model).
 
 ---
 

@@ -23,6 +23,14 @@ setting()->set('site.name', 'My Laravel App');
 $siteName = setting()->get('site.name'); // 'My Laravel App'
 ```
 
+### Check if a setting exists
+
+```php
+if (setting()->has('ui.theme')) {
+    // It was set
+}
+```
+
 ### Provide a default fallback
 
 ```php
@@ -35,14 +43,11 @@ $timezone = setting()->get('app.timezone', 'UTC');
 setting()->forget('site.name');
 ```
 
----
+### Deleting all settings for a model
 
-### Check if a setting exists
 
 ```php
-if (setting()->has('ui.theme')) {
-    // It was set
-}
+setting()->for($user)->flush();
 ```
 
 ---

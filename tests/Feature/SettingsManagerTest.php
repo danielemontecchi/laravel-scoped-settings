@@ -38,6 +38,17 @@ it('can forget a scoped setting', function () {
     expect(Setting::for($user)->get('timezone'))->toBeNull();
 });
 
+it('can flush all scoped settings', function () {
+    $user = TestUser::create(['id' => 1, 'name' => 'Jack']);
+
+    setting()->for($user)->set('name', 'Jack');
+    setting()->for($user)->set('locale', 'it');
+    setting()->for($user)->flush();
+
+    expect(setting()->for($user)->get('name'))->toBeNull()
+        ->and(setting()->for($user)->get('locale'))->toBeNull();
+});
+
 it('can check if a setting exists', function () {
     Setting::set('feature.enabled', true);
 

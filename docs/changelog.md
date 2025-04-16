@@ -10,27 +10,18 @@ Alias for the most recent stable version of the documentation.
 
 ---
 
-## [v1.0.2](https://danielemontecchi.github.io/laravel-scoped-settings/v1/) – 2025-04-16
+## v1.0.2 (2025-04-16)
 
-### ✨ Added
+- `has($key)` method to check if a setting exists.
+- `flush()` method to delete all scoped settings for a model.
 
-- `has($key)` method to check whether a key is explicitly stored in the current scope
-
-### 📘 Docs
-
-- Updated `api.md`, `usage.md`, and `README.md` with examples and explanation
-
-## [v1.0.1](https://danielemontecchi.github.io/laravel-scoped-settings/v1/) – 2025-04-16
-
-### 🔧 Fixes & Improvements
+## v1.0.1 (2025-04-16)
 
 - Fixed GitHub Actions permissions to allow `gh-pages` deployment via `GH_TOKEN`
 - Enhanced `prepare-docs.sh` compatibility by fixing unsupported grep usage
 - Documentation deploy now fully automated on new tags via `mike deploy`
 
-## [v1.0.0](https://danielemontecchi.github.io/laravel-scoped-settings/v1/) – 2025-04-16
-
-### ✨ Features
+## v1.0.0 (2025-04-16)
 
 - Global and model-scoped settings management with fluent API
 - `setting()` helper and `Setting::` facade for easy access
