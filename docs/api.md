@@ -36,6 +36,19 @@ setting()->forget('app.locale');
 
 ---
 
+## `has(string $key): bool`
+
+Checks whether a key has been explicitly set in the current scope.
+
+Returns `true` only if the setting exists in storage, not if a fallback is used.
+
+```php
+if (setting()->has('ui.theme')) {
+    // the setting exists
+}
+
+---
+
 ## `all(): array`
 
 Returns all settings as a flattened array (including group + key):

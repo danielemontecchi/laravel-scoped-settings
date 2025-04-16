@@ -10,7 +10,17 @@ Alias for the most recent stable version of the documentation.
 
 ---
 
-## [v1.0.1](https://danielemontecchi.github.io/laravel-scoped-settings/1.0.1/) – 2025-04-16
+## [v1.0.2](https://danielemontecchi.github.io/laravel-scoped-settings/v1/) – 2025-04-16
+
+### ✨ Added
+
+- `has($key)` method to check whether a key is explicitly stored in the current scope
+
+### 📘 Docs
+
+- Updated `api.md`, `usage.md`, and `README.md` with examples and explanation
+
+## [v1.0.1](https://danielemontecchi.github.io/laravel-scoped-settings/v1/) – 2025-04-16
 
 ### 🔧 Fixes & Improvements
 
@@ -18,7 +28,7 @@ Alias for the most recent stable version of the documentation.
 - Enhanced `prepare-docs.sh` compatibility by fixing unsupported grep usage
 - Documentation deploy now fully automated on new tags via `mike deploy`
 
-## [v1.0.0](https://danielemontecchi.github.io/laravel-scoped-settings/1.0.0/) – 2025-04-16
+## [v1.0.0](https://danielemontecchi.github.io/laravel-scoped-settings/v1/) – 2025-04-16
 
 ### ✨ Features
 

@@ -42,6 +42,11 @@ php artisan migrate
 setting()->set('site.name', 'My App');
 $siteName = setting()->get('site.name');
 
+// Check if a setting exists (ignores fallback)
+if (setting()->has('site.name')) {
+    // the value is explicitly set
+}
+
 // Scoped settings (e.g. per user)
 setting()->for($user)->set('dashboard.layout', 'compact');
 $layout = setting()->for($user)->get('dashboard.layout');

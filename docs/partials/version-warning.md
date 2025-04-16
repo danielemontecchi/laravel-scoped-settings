@@ -1,3 +1,4 @@
+--8<-- "partials/version-warning.md"
 !!! warning "Outdated Documentation"
 
     You are viewing documentation for an older version (**{{ version }}**).  

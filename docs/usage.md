@@ -37,6 +37,16 @@ setting()->forget('site.name');
 
 ---
 
+### Check if a setting exists
+
+```php
+if (setting()->has('ui.theme')) {
+    // It was set
+}
+```
+
+---
+
 ## 📦 Value types
 
 Values are automatically serialized to/from JSON. You can store:

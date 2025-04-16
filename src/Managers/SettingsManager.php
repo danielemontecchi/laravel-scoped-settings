@@ -60,6 +60,17 @@ class SettingsManager
             ->delete();
     }
 
+    public function has(string $key): bool
+    {
+        [$group, $key] = $this->parseKey($key);
+
+        return Setting::query()
+            ->where($this->getScopeConditions())
+            ->where('group', $group)
+            ->where('key', $key)
+            ->exists();
+    }
+
     public function all(): array
     {
         return Setting::query()
@@ -106,6 +117,4 @@ class SettingsManager
     {
         return $this->clearScope();
     }
-
-
 }

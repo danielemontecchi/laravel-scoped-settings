@@ -1,42 +1,37 @@
 #!/bin/bash
 
-# Automatically inject version warning banners and deploy documentation with mike
-set -e
+set -euo pipefail
 
-# Detect current Git tag (e.g., v1.0.0)
-VERSION=$(git describe --tags --abbrev=0 2>/dev/null || echo "latest")
-VERSION_CLEANED=${VERSION#v}
+echo "🔁 Starting full documentation rebuild (one version per major)..."
 
-echo "📌 Detected version: $VERSION_CLEANED"
+# 🧹 Step 1: Delete all previously deployed versions
+echo "🧹 Deleting existing documentation..."
+mike delete --all || echo "No previous versions to delete"
 
-# Step 1: Inject version-warning.md if not already included
-echo "⏳ Injecting version warnings where needed..."
+# 📦 Step 2: Get latest tag per major
+declare -A latest_per_major
 
-INCLUDE='--8<-- "partials/version-warning.md"'
-VERSIONED_DIR="./docs"
-
-for dir in "$VERSIONED_DIR"/*; do
-  if [[ -d "$dir" && "$dir" != *"latest"* && "$(basename "$dir")" != .* ]]; then
-    echo "📁 Processing directory: $dir"
-    for file in "$dir"/*.md; do
-      if ! LC_ALL=C grep -Fqx -- "$INCLUDE" "$file"; then
-        echo "➕ Adding banner to: $file"
-        tmpfile=$(mktemp)
-        echo "$INCLUDE" > "$tmpfile"
-        cat "$file" >> "$tmpfile"
-        mv "$tmpfile" "$file"
-      else
-        echo "✓ Banner already present in: $file"
-      fi
-    done
-  fi
+for tag in $(git tag -l "v*" | sort -V); do
+  major=$(echo "$tag" | cut -d. -f1) # v1, v2, ...
+  latest_per_major["$major"]=$tag
 done
 
-echo "✅ Banner injection complete."
+# 🚀 Step 3: Deploy documentation for each major version
+for major in "${!latest_per_major[@]}"; do
+  tag="${latest_per_major[$major]}"
+  echo "📦 Deploying tag $tag as version $major"
 
-# Step 2: Deploy with mike
-echo "🚀 Deploying docs with mike..."
-mike deploy --push --update-aliases "$VERSION_CLEANED" latest
-mike set-default latest
+  git checkout "$tag"
+  mike deploy "$major" --push
+done
 
-echo "✅ Deployment complete for version: $VERSION_CLEANED"
+# 🏁 Step 4: Checkout main branch
+echo "🔄 Switching back to main..."
+git checkout main
+
+# 🌟 Step 5: Set latest alias to most recent major version
+LATEST_MAJOR=$(git tag -l "v*" | sort -V | tail -n1 | cut -d. -f1)
+echo "⭐ Setting default version to: $LATEST_MAJOR"
+mike set-default "$LATEST_MAJOR" --push
+
+echo "✅ All major documentation versions deployed and published!"

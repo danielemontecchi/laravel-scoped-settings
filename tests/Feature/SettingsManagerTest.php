@@ -38,6 +38,13 @@ it('can forget a scoped setting', function () {
     expect(Setting::for($user)->get('timezone'))->toBeNull();
 });
 
+it('can check if a setting exists', function () {
+    Setting::set('feature.enabled', true);
+
+    expect(Setting::has('feature.enabled'))->toBeTrue()
+        ->and(Setting::has('nonexistent'))->toBeFalse();
+});
+
 it('can retrieve all settings as flat keys', function () {
     Setting::set('timezone', 'UTC');
     Setting::set('locale', 'en');

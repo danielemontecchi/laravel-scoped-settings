@@ -6,6 +6,16 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 
 ---
 
+## [v1.0.2] – 2025-04-16
+
+### ✨ Added
+
+- `has($key)` method to check whether a key is explicitly stored in the current scope
+
+### 📘 Docs
+
+- Updated `api.md`, `usage.md`, and `README.md` with examples and explanation
+
 ## [v1.0.1] - 2025-04-16
 
 ### Changed
@@ -13,7 +23,7 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 - Fix GitHub Actions deploy: configurazione corretta per push su branch `gh-pages` tramite token
 - Piccole ottimizzazioni nel deploy script (`prepare-docs.sh`)
 
-## [1.0.0] - 2025-04-16
+## [v1.0.0] - 2025-04-16
 
 ### Added
 
