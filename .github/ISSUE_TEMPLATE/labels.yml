@@ -1,55 +1,55 @@
 # Tipo
 - name: type:bug
-  color: d73a4a
+  color: "d73a4a"
   description: Something isn't working as expected
 
 - name: type:feature
-  color: a2eeef
+  color: "a2eeef"
   description: New feature or enhancement request
 
 - name: type:docs
-  color: 0075ca
+  color: "0075ca"
   description: Docs are missing, wrong, or unclear
 
 - name: type:question
-  color: d876e3
+  color: "d876e3"
   description: General usage question
 
 - name: type:refactor
-  color: f9d0c4
+  color: "f9d0c4"
   description: Code cleanup, not user-facing
 
 # Stato
 - name: status:needs info
-  color: fbca04
+  color: "fbca04"
   description: More information is needed
 
 - name: status:accepted
-  color: 0e8a16
+  color: "0e8a16"
   description: Will be implemented
 
 - name: status:blocked
-  color: e99695
+  color: "e99695"
   description: Blocked by another task or decision
 
 # Area
 - name: area:settings
-  color: 8dd3c7
+  color: "8dd3c7"
   description: Core logic or manager-level functionality
 
 - name: area:facade
-  color: 80b1d3
+  color: "80b1d3"
   description: Facade or helper layer
 
 - name: area:docs
-  color: b3de69
+  color: "b3de69"
   description: Documentation-related area
 
 # Contributi
 - name: good first issue
-  color: 7057ff
+  color: "7057ff"
   description: Great for newcomers
 
 - name: help wanted
-  color: 008672
+  color: "008672"
   description: Contributions are welcome

@@ -10,6 +10,14 @@ Alias for the most recent stable version of the documentation.
 
 ---
 
+## v1.0.3 (2025-04-17)
+
+- Refactored deployment logic and documentation generation via GitHub Actions.
+- Improved `prepare-docs.sh` for more robust and automated publishing.
+- Auto-generation of `latest` alias and `index.html` redirect.
+- GitHub issue templates for bugs, features, docs, and questions.
+- Label sync workflow based on `.github/labels.yml`.
+
 ## v1.0.2 (2025-04-16)
 
 - `has($key)` method to check if a setting exists.
