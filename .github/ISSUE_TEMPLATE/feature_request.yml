@@ -1,22 +1,27 @@
-name: "\ud83d\udca1 Feature request"
-description: "Suggest an idea or enhancement"
+name: "✨ Feature request"
+description: "Propose a new feature or capability."
 title: "[Feature] "
 labels: ["type:feature"]
 body:
   - type: textarea
-    id: description
+    id: motivation
     attributes:
-      label: What feature would you like to see?
-      description: Describe your idea and how it would improve the package
-      placeholder: "I’d like to be able to..."
+      label: "What problem would this solve?"
+      description: "Explain the use case or pain point."
+      placeholder: "I need to define default settings per group..."
     validations:
       required: true
 
   - type: textarea
-    id: motivation
+    id: proposal
     attributes:
-      label: Why is this feature useful?
-      description: Explain the use case or problem this feature would solve
-      placeholder: "This would help when..."
+      label: "Describe the solution you'd like"
+      placeholder: "Add support for group-level scoping with fallback to team..."
     validations:
-      required: false
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: "Any alternative solutions or workarounds?"
+      placeholder: "I currently work around it by..."

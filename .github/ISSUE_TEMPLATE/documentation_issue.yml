@@ -1,21 +1,20 @@
-name: "\ud83d\udcdc Documentation issue"
-description: "Report a problem in the documentation"
+name: "📚 Documentation issue"
+description: "Report something missing or unclear in the docs."
 title: "[Docs] "
-labels: ["area:documentation"]
+labels: ["type:docs"]
 body:
   - type: textarea
-    id: description
+    id: where
     attributes:
-      label: What's wrong or missing?
-      description: Describe what’s unclear, incorrect or incomplete
-      placeholder: "On the README line X..."
+      label: "Where is the documentation unclear or missing?"
+      placeholder: "e.g., in usage.md > set() example"
     validations:
       required: true
 
   - type: textarea
     id: suggestion
     attributes:
-      label: How could it be improved?
-      placeholder: "Maybe add an example of..."
+      label: "What could be improved?"
+      placeholder: "It would help to add a code snippet showing..."
     validations:
-      required: false
+      required: true

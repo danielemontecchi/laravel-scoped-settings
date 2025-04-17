@@ -45,3 +45,6 @@ vendor-bin/
 /ecs.cache
 /psalm.xml
 /psalm-cache/
+
+.venv-docs/
+site/

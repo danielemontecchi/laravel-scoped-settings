@@ -1,37 +1,75 @@
 #!/bin/bash
 
-set -euo pipefail
+set -e
 
-echo "🔁 Starting full documentation rebuild (one version per major)..."
+echo "🔵 Using mike from: $(which mike)"
+echo "📦 Mike version: $(mike --version)"
 
-# 🧹 Step 1: Delete all previously deployed versions
-echo "🧹 Deleting existing documentation..."
-mike delete --all || echo "No previous versions to delete"
+# Checkout gh-pages branch e pulizia
+echo "🧹 Cleaning up gh-pages..."
+git fetch origin gh-pages
+git switch gh-pages
+git pull origin gh-pages
+rm -rf *
+rm -rf .idea/
 
-# 📦 Step 2: Get latest tag per major
-declare -A latest_per_major
+echo "✅ Cleaned gh-pages branch."
 
-for tag in $(git tag -l "v*" | sort -V); do
+# Ricava i tag ordinati
+echo "🚀 Collecting latest tag for each major..."
+TAGS=$(git tag --sort=-v:refname | grep -E '^v[0-9]+\.[0-9]+\.[0-9]+$')
+
+declare -A majors
+for tag in $TAGS; do
   major=$(echo "$tag" | cut -d. -f1) # v1, v2, ...
-  latest_per_major["$major"]=$tag
+  if [ -z "${majors[$major]}" ]; then
+    majors[$major]=$tag
+  fi
 done
 
-# 🚀 Step 3: Deploy documentation for each major version
-for major in "${!latest_per_major[@]}"; do
-  tag="${latest_per_major[$major]}"
-  echo "📦 Deploying tag $tag as version $major"
-
-  git checkout "$tag"
-  mike deploy "$major" --push
+# Trova la major più alta per alias 'latest'
+latest_tag=""
+for major in "${!majors[@]}"; do
+  tag="${majors[$major]}"
+  if [ -z "$latest_tag" ] || [[ "$tag" > "$latest_tag" ]]; then
+    latest_tag="$tag"
+  fi
 done
 
-# 🏁 Step 4: Checkout main branch
-echo "🔄 Switching back to main..."
-git checkout main
+# Deploy delle versioni major
+echo "📚 Starting full documentation rebuild (one version per major)..."
+for major in "${!majors[@]}"; do
+  tag="${majors[$major]}"
+  echo "📦 Deploying $tag as ${tag%%.*}"
+  git checkout "tags/$tag"
+  aliases="${tag%%.*}"
+  if [ "$tag" == "$latest_tag" ]; then
+    aliases="$aliases latest"
+    echo "✅ $tag is the latest version"
+  fi
+  mike deploy --update-aliases $aliases "$tag"
+done
 
-# 🌟 Step 5: Set latest alias to most recent major version
-LATEST_MAJOR=$(git tag -l "v*" | sort -V | tail -n1 | cut -d. -f1)
-echo "⭐ Setting default version to: $LATEST_MAJOR"
-mike set-default "$LATEST_MAJOR" --push
+# Crea redirect da index.html alla versione latest
+echo "🔁 Creating index.html redirect to /latest/"
+cat <<EOF > index.html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="refresh" content="0; url=latest/" />
+    <script>window.location.href = 'latest/'</script>
+    <title>Redirecting...</title>
+  </head>
+  <body>
+    <p>Redirecting to <a href="latest/">latest version</a>.</p>
+  </body>
+</html>
+EOF
 
-echo "✅ All major documentation versions deployed and published!"
+# Commit e push
+git add .
+git commit -m "Deployed documentation to $latest_tag with MkDocs 1.6.1 and mike 2.1.3"
+git push origin gh-pages
+
+# Ritorna a main
+git switch main

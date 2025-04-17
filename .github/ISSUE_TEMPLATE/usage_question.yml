@@ -1,21 +1,18 @@
-name: "\u2753 Usage question"
-description: "Ask for help with using the package"
+name: "❓ Usage question"
+description: "Ask a question about how to use the package."
 title: "[Question] "
-labels: ["type:enhancement"]
+labels: ["type:question"]
 body:
   - type: textarea
-    id: question
+    id: context
     attributes:
-      label: What would you like help with?
-      description: Please explain your doubt as clearly as possible
-      placeholder: "How can I use this with scoped settings for teams?"
+      label: "What are you trying to do?"
+      placeholder: "I'm trying to override a setting only if the team has one defined..."
     validations:
       required: true
 
-  - type: input
-    id: version
+  - type: textarea
+    id: code
     attributes:
-      label: Package version
-      placeholder: "e.g. 1.0.0"
-    validations:
-      required: false
+      label: "Relevant code snippet"
+      placeholder: "Add any relevant code, if needed."
