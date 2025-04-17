@@ -4,6 +4,7 @@ namespace DanieleMontecchi\LaravelScopedSettings\Managers;
 
 use DanieleMontecchi\LaravelScopedSettings\Models\Setting;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Cache;
 
 class SettingsManager
 {
@@ -26,16 +27,32 @@ class SettingsManager
     {
         [$group, $key] = $this->parseKey($key);
 
+        $cacheKey = $this->getCacheKey($key);
+        if (Cache::has($cacheKey)) {
+            return Cache::get($cacheKey);
+        }
+
         $setting = Setting::query()
             ->where($this->getScopeConditions())
             ->where('group', $group)
             ->where('key', $key)
             ->first();
 
-        return $setting?->value ?? $default;
+        $value = $setting?->value ?? $default;
+
+        // Optional cache: if TTL is defined in config, store it
+        $ttl = is_null($this->scopeType)
+            ? config('scoped-settings.cache.global_ttl')
+            : config('scoped-settings.cache.scoped_ttl');
+
+        if (!is_null($ttl)) {
+            Cache::put($cacheKey, $value, $ttl);
+        }
+
+        return $value;
     }
 
-    public function set(string $key, mixed $value): void
+    public function set(string $key, mixed $value, ?int $ttl = null): void
     {
         [$group, $key] = $this->parseKey($key);
 
@@ -47,6 +64,19 @@ class SettingsManager
         ], [
             'value' => $value,
         ]);
+
+        // Cache logic
+        $cacheKey = $this->getCacheKey($key);
+        if (is_null($ttl)) {
+            $ttl = is_null($this->scopeType)
+                ? config('scoped-settings.cache.global_ttl')
+                : config('scoped-settings.cache.scoped_ttl');
+        }
+
+        if (!is_null($ttl)) {
+            Cache::put($cacheKey, $value, $ttl);
+        }
+
     }
 
     public function forget(string $key): void
@@ -123,5 +153,15 @@ class SettingsManager
     public function forGlobal(): static
     {
         return $this->clearScope();
+    }
+
+
+    protected function getCacheKey(string $key): string
+    {
+        $scopePrefix = is_null($this->scopeType)
+            ? 'global'
+            : strtolower(class_basename($this->scopeType)) . ':' . $this->scopeId;
+
+        return "scoped-settings:{$scopePrefix}:{$key}";
     }
 }

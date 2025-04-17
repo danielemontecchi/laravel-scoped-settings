@@ -17,10 +17,21 @@ You can access the settings manager using:
 setting()->set('site.name', 'My Laravel App');
 ```
 
+### Set a value with caching
+
+```php
+// Cache the setting for 30 minutes
+setting()->set('site.enabled', true, 1800);
+
+// Use config-defined TTL (if set), or no cache if null
+setting()->set('site.enabled', true);
+```
+
 ### Get a setting
 
 ```php
 $siteName = setting()->get('site.name'); // 'My Laravel App'
+// If a TTL is configured, the value will be cached automatically.
 ```
 
 ### Check if a setting exists

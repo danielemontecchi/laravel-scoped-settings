@@ -75,6 +75,25 @@ expect(setting()->for($user)->get('timezone'))->toBe('Europe/Rome');
 
 ---
 
+## ⚡ Caching per scope
+
+When using `set()` on scoped or global settings, you can enable caching by providing a TTL:
+
+```php
+setting()->for($user)->set('dashboard.layout', 'compact', 600); // cache 10 minutes
+```
+
+If you omit the TTL, the system will look for defaults in the config:
+
+```php
+// uses config('scoped-settings.cache.scoped_ttl') or global_ttl
+setting()->for($user)->set('dashboard.layout', 'compact');
+```
+
+Cached values will be returned by `get()` automatically when available.
+
+---
+
 ## 💡 Tip
 
 If you're using the settings in a controller or service and want to keep it scoped to the authenticated user:

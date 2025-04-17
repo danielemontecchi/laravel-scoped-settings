@@ -14,7 +14,7 @@
 - ⚡ Supports **global settings** and **per-model scoped settings**
 - 🎯 API via Facade and `setting()` helper
 - ✅ Includes artisan commands and full test suite
-- 📖 Comes with documentation via GitHub Pages (powered by MkDocs)
+- 🚀 Optional **per-scope caching** built into `set()` and `get()`
 
 ---
 
@@ -24,6 +24,12 @@ You can install the package via Composer:
 
 ```bash
 composer require danielemontecchi/laravel-scoped-settings
+```
+
+To customize default cache behavior, publish the config file:
+
+```bash
+php artisan vendor:publish --tag="laravel-scoped-settings-config"
 ```
 
 To publish and run the migrations:
@@ -41,6 +47,12 @@ php artisan migrate
 // Global settings
 setting()->set('site.name', 'My App');
 $siteName = setting()->get('site.name');
+
+// Set with optional caching (global or scoped)
+setting()->set('site.name', 'My App', 3600); // Cache for 1 hour
+
+// If TTL is omitted, uses default from config (or disables cache)
+setting()->set('site.name', 'My App'); // No cache if config is null
 
 // Check if a setting exists (ignores fallback)
 if (setting()->has('site.name')) {
