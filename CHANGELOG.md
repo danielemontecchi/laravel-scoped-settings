@@ -7,6 +7,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [v1.1.0] - 2025-04-17
+
+### Added
+- Caching support via TTL in `set()` with global and scoped config fallback.
+- Automatic fallback to global value when scoped setting is missing (configurable).
+- Artisan commands:
+  - `settings:export` to export all settings in JSON format.
+  - `settings:import` to import settings with `--merge` or `--overwrite` options.
+
+### Removed
+- `settings:dump` command (replaced by `export`/`import`).
+
+### Improved
+- More reliable CLI tools for configuration and data portability.
+- Fully documented `SettingsManager` with PHPDoc and inline comments.
+
+---
+
 ## [1.0.3] - 2025-04-17
 ### Changed
 - Refactored deployment logic and documentation generation via GitHub Actions.

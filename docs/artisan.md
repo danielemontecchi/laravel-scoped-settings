@@ -1,6 +1,7 @@
 # Artisan Commands
 
-Laravel Scoped Settings comes with helpful Artisan commands to inspect, export, and clear settings directly from the CLI.
+Laravel Scoped Settings comes with helpful Artisan commands to inspect, export, and clear settings directly from the
+CLI.
 
 These commands are useful for debugging, backup/restore workflows, or administrative tasks.
 
@@ -45,44 +46,32 @@ This will delete only the settings for the given model instance.
 
 ---
 
-## 🧾 Export settings
+### Export Settings
 
 ```bash
-php artisan settings:dump
+php artisan settings:export
 ```
 
-This will output all settings as a JSON array to the console. Example:
+Exports all settings to `storage/app/settings/YYYYMMDD_HHMMSS_settings_export.json`
 
-```json
-[
-  {
-    "scope_type": null,
-    "scope_id": null,
-    "group": "site",
-    "key": "name",
-    "value": "Laravel"
-  },
-  {
-    "scope_type": "App\\Models\\User",
-    "scope_id": 1,
-    "group": "ui",
-    "key": "theme",
-    "value": "dark"
-  }
-]
-```
+**Options:**
 
-To pretty-print the JSON:
+- `--only-global` → export only global settings
+- `--scope-type=...` → export by model type
+- `--scope-id=...` → export by model type + ID
+
+### Import Settings
 
 ```bash
-php artisan settings:dump --pretty
+php artisan settings:import path/to/file.json
 ```
 
-To filter by scope:
+Imports settings from a previously exported JSON file.
 
-```bash
-php artisan settings:dump --scope_type="App\\Models\\User" --scope_id=1
-```
+**Options:**
+
+- `--merge` → update existing values (default)
+- `--overwrite` → delete existing and fully replace
 
 ---
 

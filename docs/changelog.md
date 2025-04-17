@@ -10,6 +10,15 @@ Alias for the most recent stable version of the documentation.
 
 ---
 
+## v1.1.0 (2025-04-17)
+
+- `remember()` method to optionally cache retrieved settings.
+- Automatic fallback from scoped to global settings in `get()` method.
+- Artisan commands:
+  - `settings:export` to export settings to a file.
+  - `settings:import` to import settings with merge or overwrite options.
+- Deprecated `settings:dump` command (replaced by export/import).
+
 ## v1.0.3 (2025-04-17)
 
 - Refactored deployment logic and documentation generation via GitHub Actions.

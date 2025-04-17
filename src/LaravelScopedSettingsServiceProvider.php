@@ -3,8 +3,9 @@
 namespace DanieleMontecchi\LaravelScopedSettings;
 
 use DanieleMontecchi\LaravelScopedSettings\Commands\ClearSettingsCommand;
-use DanieleMontecchi\LaravelScopedSettings\Commands\DumpSettingsCommand;
+use DanieleMontecchi\LaravelScopedSettings\Commands\ExportSettingsCommand;
 use DanieleMontecchi\LaravelScopedSettings\Commands\ListSettingsCommand;
+use DanieleMontecchi\LaravelScopedSettings\Commands\ImportSettingsCommand;
 use DanieleMontecchi\LaravelScopedSettings\Managers\SettingsManager;
 use Illuminate\Support\ServiceProvider;
 
@@ -44,8 +45,9 @@ class LaravelScopedSettingsServiceProvider extends ServiceProvider
 
         $this->commands([
             ListSettingsCommand::class,
+            ExportSettingsCommand::class,
+            ImportSettingsCommand::class,
             ClearSettingsCommand::class,
-            DumpSettingsCommand::class,
         ]);
     }
 }

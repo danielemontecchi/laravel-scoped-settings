@@ -41,7 +41,7 @@ php artisan migrate
 
 ---
 
-## 🚀 Usage
+## 🛠 Usage
 
 ```php
 // Global settings
@@ -82,9 +82,10 @@ setting()->forget('site.name');
 ## 🛠 Artisan Commands
 
 ```bash
-php artisan settings:list     # Show all settings
+php artisan settings:list     # Show all settings in CLI
 php artisan settings:clear    # Clear all settings
-php artisan settings:dump     # Dump settings to JSON
+php artisan settings:export   # Export settings to JSON
+php artisan settings:import   # Import settings from JSON
 ```
 
 ---
