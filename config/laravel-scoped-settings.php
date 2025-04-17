@@ -28,4 +28,17 @@ return [
 
     ],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Fallback Behavior
+    |--------------------------------------------------------------------------
+    |
+    | If enabled, when a scoped setting is not found, the system will attempt
+    | to retrieve the global setting instead (only if no default is provided).
+    | This behavior helps maintain consistent values across scopes.
+    |
+    */
+
+    'fallback_to_global' => env('SETTINGS_SCOPED_FALLBACK', true),
+
 ];

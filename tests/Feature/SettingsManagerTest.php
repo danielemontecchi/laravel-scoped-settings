@@ -71,7 +71,6 @@ it('can retrieve a group of settings scoped to a model', function () {
 
     Setting::for($user)->set('timezone', 'Europe/Rome');
     Setting::for($user)->set('currency', 'EUR');
-    dump(Setting::for($user)->all());
 
     expect(Setting::for($user)->all())->toEqual([
         'default.timezone' => 'Europe/Rome',
