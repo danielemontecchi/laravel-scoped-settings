@@ -15,7 +15,7 @@ rm -rf .idea/
 
 echo "✅ Cleaned gh-pages branch."
 
-# Ricava i tag ordinati
+# Ricava i tag ordinati e prendi solo l'ultima patch per ogni major
 echo "🚀 Collecting latest tag for each major..."
 TAGS=$(git tag --sort=-v:refname | grep -E '^v[0-9]+\.[0-9]+\.[0-9]+$')
 
@@ -37,17 +37,18 @@ for major in "${!majors[@]}"; do
 done
 
 # Deploy delle versioni major
-echo "📚 Starting full documentation rebuild (one version per major)..."
+echo "📚 Starting documentation deploy (one version per major)..."
 for major in "${!majors[@]}"; do
   tag="${majors[$major]}"
-  echo "📦 Deploying $tag as ${tag%%.*}"
+  alias="${tag%%.*}" # v1, v2, ...
   git checkout "tags/$tag"
-  aliases="${tag%%.*}"
   if [ "$tag" == "$latest_tag" ]; then
-    aliases="$aliases latest"
-    echo "✅ $tag is the latest version"
+    mike deploy --update-aliases "$alias" latest "$tag"
+    echo "✅ Deployed $tag as $alias and latest"
+  else
+    mike deploy --update-aliases "$alias" "$tag"
+    echo "📦 Deployed $tag as $alias"
   fi
-  mike deploy --update-aliases $aliases "$tag"
 done
 
 # Crea redirect da index.html alla versione latest
@@ -68,7 +69,7 @@ EOF
 
 # Commit e push
 git add .
-git commit -m "Deployed documentation to $latest_tag with MkDocs 1.6.1 and mike 2.1.3"
+git commit -m "Deployed documentation to $latest_tag with major-only versions and latest alias"
 git push origin gh-pages
 
 # Ritorna a main
