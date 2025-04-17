@@ -18,7 +18,7 @@
       
       
       <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.11">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.12">
     
     
       
@@ -26,7 +26,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.4af4bdda.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.2afb09e1.min.css">
       
         
         <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
@@ -493,6 +493,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#set-a-value-with-caching" class="md-nav__link">
+    <span class="md-ellipsis">
+      Set a value with caching
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#get-a-setting" class="md-nav__link">
     <span class="md-ellipsis">
       Get a setting
@@ -705,8 +714,16 @@
 <h3 id="set-a-global-setting">Set a global setting<a class="headerlink" href="#set-a-global-setting" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="x">setting()-&gt;set(&#39;site.name&#39;, &#39;My Laravel App&#39;);</span>
 </code></pre></div>
+<h3 id="set-a-value-with-caching">Set a value with caching<a class="headerlink" href="#set-a-value-with-caching" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="x">// Cache the setting for 30 minutes</span>
+<span class="x">setting()-&gt;set(&#39;site.enabled&#39;, true, 1800);</span>
+
+<span class="x">// Use config-defined TTL (if set), or no cache if null</span>
+<span class="x">setting()-&gt;set(&#39;site.enabled&#39;, true);</span>
+</code></pre></div>
 <h3 id="get-a-setting">Get a setting<a class="headerlink" href="#get-a-setting" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="x">$siteName = setting()-&gt;get(&#39;site.name&#39;); // &#39;My Laravel App&#39;</span>
+<span class="x">// If a TTL is configured, the value will be cached automatically.</span>
 </code></pre></div>
 <h3 id="check-if-a-setting-exists">Check if a setting exists<a class="headerlink" href="#check-if-a-setting-exists" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="x">if (setting()-&gt;has(&#39;ui.theme&#39;)) {</span>
