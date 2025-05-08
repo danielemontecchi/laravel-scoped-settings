@@ -1,26 +1,28 @@
 {
   "name": "danielemontecchi/laravel-scoped-settings",
-  "description": "A Laravel package for global and model-scoped application settings.",
-  "keywords": [
-    "laravel",
-    "settings",
-    "scoped",
-    "model",
-    "configuration"
-  ],
+  "description": "Manage global and model-scoped settings in Laravel with a clean API, artisan commands, and optional per-scope caching.",
   "type": "library",
   "license": "MIT",
   "authors": [
     {
       "name": "Daniele Montecchi",
-      "email": "daniele@montecchi.me",
-      "homepage": "https://github.com/danielemontecchi"
+      "email": "daniele@montecchi.me"
     }
   ],
+  "homepage": "https://danieelmontecchi.com",
   "support": {
     "issues": "https://github.com/danielemontecchi/laravel-scoped-settings/issues",
     "source": "https://github.com/danielemontecchi/laravel-scoped-settings"
   },
+  "keywords": [
+    "laravel",
+    "settings",
+    "scoped",
+    "global-settings",
+    "model-settings",
+    "caching",
+    "configuration"
+  ],
   "autoload": {
     "psr-4": {
       "DanieleMontecchi\\LaravelScopedSettings\\": "src/",
@@ -38,8 +40,8 @@
     }
   },
   "require": {
-    "php": "^8.1",
-    "illuminate/support": "^10.0 || ^11.0 || ^12.0"
+    "php": "^8.1 || ^8.2 || ^8.3 || ^8.4",
+    "illuminate/support": "^10.0|^11.0|^12.0"
   },
   "minimum-stability": "stable",
   "prefer-stable": true,
