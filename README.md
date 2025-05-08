@@ -3,7 +3,7 @@
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/danielemontecchi/laravel-scoped-settings.svg?style=flat-square)](https://packagist.org/packages/danielemontecchi/laravel-scoped-settings)
 [![Total Downloads](https://img.shields.io/packagist/dt/danielemontecchi/laravel-scoped-settings.svg?style=flat-square)](https://packagist.org/packages/danielemontecchi/laravel-scoped-settings)
 [![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/danielemontecchi/laravel-scoped-settings/tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/danielemontecchi/laravel-scoped-settings/actions/workflows/tests.yml)
-[![codecov](https://codecov.io/gh/danielemontecchi/laravel-scoped-settings/branch/main/graph/badge.svg?token=YOUR_TOKEN_HERE)](https://codecov.io/gh/danielemontecchi/laravel-scoped-settings)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=danielemontecchi_laravel-scoped-settings&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=danielemontecchi_laravel-scoped-settings)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](LICENSE.md)
 [![Documentation](https://img.shields.io/badge/docs-available-brightgreen.svg?style=flat-square)](https://danielemontecchi.github.io/laravel-scoped-settings)
 
@@ -116,6 +116,11 @@ Includes:
 
 ---
 
-## 📝 License
+## License
 
-The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
+Laravel Scoped Settings is open-source software licensed under the **MIT license**.
+See the [LICENSE.md](LICENSE.md) file for full details.
+
+---
+
+Made with ❤️ by [Daniele Montecchi](https://danielemontecchi.com)
