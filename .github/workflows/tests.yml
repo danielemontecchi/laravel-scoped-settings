@@ -67,7 +67,9 @@ jobs:
           tools: composer:v2
 
       - name: Install dependencies
-        run: composer install --prefer-dist --no-progress
+        run: |
+          composer require "larastan/larastan:^3.9" --dev --no-update --no-interaction
+          composer install --prefer-dist --no-progress
 
       - name: Run linting
         run: composer lint
