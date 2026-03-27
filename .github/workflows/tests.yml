@@ -13,15 +13,9 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        php: [8.1, 8.2, 8.3, 8.4]
+        php: [8.3, 8.4]
         laravel: [10, 11, 12, 13]
         exclude:
-          - php: 8.1
-            laravel: 11
-          - php: 8.1
-            laravel: 12
-          - php: 8.1
-            laravel: 13
           - php: 8.4
             laravel: 10
           - php: 8.4
@@ -57,6 +51,23 @@ jobs:
 
       - name: Run Pest
         run: ./vendor/bin/pest
+
+  lint:
+    name: Lint (PHPStan)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@e6f75134d35752277f093989e72e140eaa222f35 # v2
+        with:
+          php-version: '8.3'
+          coverage: none
+          tools: composer:v2
+
+      - name: Install dependencies
+        run: composer install --prefer-dist --no-progress
 
       - name: Run linting
         run: composer lint
