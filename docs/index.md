@@ -6,11 +6,11 @@
 
 ## ✨ Key Features
 
-- ✅ Store settings globally or per Eloquent model  
-- ✅ Simple fluent API using `setting()` helper or `Setting::` facade  
-- ✅ Support for nested grouping using dot notation (e.g. `notifications.email`)  
-- ✅ Automatic casting of scalars and arrays (JSON handling)  
-- ✅ Artisan commands to list, clear and export settings  
+- ✅ Store settings globally or per Eloquent model
+- ✅ Simple fluent API using `setting()` helper or `Setting::` facade
+- ✅ Support for nested grouping using dot notation (e.g. `notifications.email`)
+- ✅ Automatic casting of scalars and arrays (JSON handling)
+- ✅ Artisan commands to list, clear and export settings
 - ✅ Built-in support for versioned documentation via [mike](https://github.com/jimporter/mike)
 
 ---
@@ -39,8 +39,8 @@ Use Laravel Scoped Settings when you need to:
 
 ## 📦 Requirements
 
-- PHP >= 8.1  
-- Laravel 10, 11, 12, or 13  
+- PHP >= 8.1
+- Laravel 10, 11, 12, or 13
 - Composer, Git, and optionally GitHub Pages for docs
 
 ---

@@ -5,6 +5,7 @@
 [![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/danielemontecchi/laravel-scoped-settings/tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/danielemontecchi/laravel-scoped-settings/actions/workflows/tests.yml)
 [![codecov](https://codecov.io/gh/danielemontecchi/laravel-scoped-settings/graph/badge.svg?token=OBCGWZK8VL)](https://codecov.io/gh/danielemontecchi/laravel-scoped-settings)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=danielemontecchi_laravel-scoped-settings&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=danielemontecchi_laravel-scoped-settings)
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=danielemontecchi_laravel-scoped-settings&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=danielemontecchi_laravel-scoped-settings)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](LICENSE.md)
 [![Documentation](https://img.shields.io/badge/docs-available-brightgreen.svg?style=flat-square)](https://danielemontecchi.github.io/laravel-scoped-settings)
 
@@ -119,18 +120,9 @@ Includes:
 
 ## License
 
-<<<<<<< HEAD
-The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
-
----
-
-Made with ❤️ by [Daniele Montecchi](https://github.com/danielemontecchi)
-
-=======
 Laravel Scoped Settings is open-source software licensed under the **MIT license**.
 See the [LICENSE.md](LICENSE.md) file for full details.
 
 ---
 
 Made with ❤️ by [Daniele Montecchi](https://danielemontecchi.com)
->>>>>>> 5c187b1504079dc184e7ee63e362654ea294db53
