@@ -7,7 +7,7 @@ Laravel Scoped Settings can be easily installed via Composer and integrates auto
 ## 📦 Requirements
 
 - PHP >= 8.1  
-- Laravel 10 or 11  
+- Laravel 10, 11, 12, or 13  
 - Composer
 
 ---

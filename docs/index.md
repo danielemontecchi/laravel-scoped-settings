@@ -40,7 +40,7 @@ Use Laravel Scoped Settings when you need to:
 ## 📦 Requirements
 
 - PHP >= 8.1  
-- Laravel 10 or 11  
+- Laravel 10, 11, 12, or 13  
 - Composer, Git, and optionally GitHub Pages for docs
 
 ---

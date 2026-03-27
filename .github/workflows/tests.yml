@@ -21,10 +21,10 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v4.1.1
 
       - name: Set up PHP
-        uses: shivammathur/setup-php@v2
+        uses: shivammathur/setup-php@v2.28.0
         with:
           php-version: ${{ matrix.php }}
           coverage: xdebug
@@ -45,10 +45,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v4.1.1
 
       - name: Set up PHP
-        uses: shivammathur/setup-php@v2
+        uses: shivammathur/setup-php@v2.28.0
         with:
           php-version: '8.2'
           coverage: xdebug
@@ -61,7 +61,7 @@ jobs:
         run: ./vendor/bin/pest --coverage-clover=coverage.xml
 
       - name: Upload coverage reports to Codecov
-        uses: codecov/codecov-action@v5
+        uses: codecov/codecov-action@v5.2.0
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           slug: danielemontecchi/laravel-scoped-settings
