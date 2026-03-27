@@ -1,17 +1,6 @@
 <?php
 
 use DanieleMontecchi\LaravelScopedSettings\Models\Setting;
-use Illuminate\Support\Facades\Artisan;
-use Illuminate\Support\Facades\Schema;
-
-beforeEach(function () {
-    if (!Schema::hasTable('settings')) {
-        Artisan::call('migrate', ['--path' => 'vendor/danielemontecchi/laravel-scoped-settings/database/migrations']);
-    }
-    if (!Schema::hasTable('test_users')) {
-        Artisan::call('migrate', ['--path' => 'vendor/danielemontecchi/laravel-scoped-settings/tests/database/migrations']);
-    }
-});
 
 it('stores and retrieves a scalar value correctly', function () {
     $setting = Setting::create([

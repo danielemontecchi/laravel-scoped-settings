@@ -119,3 +119,27 @@ it('stores same key with different values per scope', function () {
         ->and(Setting::for($user2)->get('theme'))->toBe('dark')
         ->and(Setting::forGlobal()->get('theme'))->toBe('system');
 });
+
+it('can retrieve settings filtered by group', function () {
+    $user = TestUser::create(['id' => 1, 'name' => 'Jack']);
+
+    Setting::for($user)->set('notifications.email', true);
+    Setting::for($user)->set('notifications.sms', false);
+    Setting::for($user)->set('ui.theme', 'dark');
+
+    expect(Setting::for($user)->group('notifications'))->toBe([
+        'email' => true,
+        'sms'   => false,
+    ]);
+});
+
+it('can retrieve global settings filtered by group', function () {
+    Setting::set('mail.driver', 'smtp');
+    Setting::set('mail.port', 587);
+    Setting::set('app.name', 'MyApp');
+
+    expect(Setting::group('mail'))->toBe([
+        'driver' => 'smtp',
+        'port'   => 587,
+    ]);
+});

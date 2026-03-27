@@ -60,8 +60,8 @@ class SettingsManager
             return $default;
         }
 
-        if (config('scoped-settings.fallback_to_global', false) && $this->isScoped()) {
-            $globalSetting = (new static)->get("{$group}.{$key}");
+        if (config('laravel-scoped-settings.fallback_to_global', false) && $this->isScoped()) {
+            $globalSetting = (new self())->get("{$group}.{$key}");
             if (!is_null($globalSetting)) {
                 $this->set("{$group}.{$key}", $globalSetting);
                 return $globalSetting;
@@ -88,7 +88,7 @@ class SettingsManager
             ['value' => $value]
         );
 
-        $ttl = $ttl ?? config('scoped-settings.cache.ttl.' . ($this->isScoped() ? 'scoped' : 'global'));
+        $ttl = $ttl ?? config('laravel-scoped-settings.cache.' . ($this->isScoped() ? 'scoped_ttl' : 'global_ttl'));
 
         if (!is_null($ttl)) {
             Cache::put($this->getCacheKey("{$group}.{$key}"), $value, $ttl);

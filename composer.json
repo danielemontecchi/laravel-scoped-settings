@@ -35,7 +35,7 @@
         "DanieleMontecchi\\LaravelScopedSettings\\LaravelScopedSettingsServiceProvider"
       ],
       "aliases": {
-        "Settings": "DanieleMontecchi\\LaravelScopedSettings\\Facades\\Settings"
+        "Settings": "DanieleMontecchi\\LaravelScopedSettings\\Facades\\Setting"
       }
     }
   },

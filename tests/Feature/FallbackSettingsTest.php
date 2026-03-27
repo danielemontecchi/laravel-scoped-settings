@@ -4,7 +4,7 @@ use Tests\Stubs\TestUser;
 use DanieleMontecchi\LaravelScopedSettings\Facades\Setting;
 
 beforeEach(function () {
-    config(['scoped-settings.fallback_to_global' => true]);
+    config(['laravel-scoped-settings.fallback_to_global' => true]);
 });
 
 it('returns scoped value when present', function () {
@@ -44,7 +44,7 @@ it('stores global fallback into scoped settings when used', function () {
 });
 
 it('returns null if no value is found and fallback is disabled', function () {
-    config(['scoped-settings.fallback_to_global' => false]);
+    config(['laravel-scoped-settings.fallback_to_global' => false]);
 
     $user = new TestUser(['id' => 1]);
 

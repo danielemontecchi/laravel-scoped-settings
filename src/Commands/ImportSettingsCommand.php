@@ -48,7 +48,7 @@ class ImportSettingsCommand extends Command
             Setting::query()->delete();
         }
 
-        DB::transaction(function () use ($data, $mode) {
+        DB::transaction(function () use ($data) {
             foreach ($data as $entry) {
                 if (!isset($entry['group'], $entry['key'], $entry['value'])) {
                     continue; // skip invalid entries
@@ -66,10 +66,8 @@ class ImportSettingsCommand extends Command
                 $existing = $query->first();
 
                 if ($existing) {
-                    if ($mode === 'overwrite' || $mode === 'merge') {
-                        $existing->value = $entry['value'];
-                        $existing->save();
-                    }
+                    $existing->value = $entry['value'];
+                    $existing->save();
 
                     continue;
                 }
