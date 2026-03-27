@@ -3,7 +3,6 @@
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/danielemontecchi/laravel-scoped-settings.svg?style=flat-square)](https://packagist.org/packages/danielemontecchi/laravel-scoped-settings)
 [![Total Downloads](https://img.shields.io/packagist/dt/danielemontecchi/laravel-scoped-settings.svg?style=flat-square)](https://packagist.org/packages/danielemontecchi/laravel-scoped-settings)
 [![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/danielemontecchi/laravel-scoped-settings/tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/danielemontecchi/laravel-scoped-settings/actions/workflows/tests.yml)
-[![codecov](https://codecov.io/gh/danielemontecchi/laravel-scoped-settings/graph/badge.svg?token=OBCGWZK8VL)](https://codecov.io/gh/danielemontecchi/laravel-scoped-settings)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=danielemontecchi_laravel-scoped-settings&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=danielemontecchi_laravel-scoped-settings)
 [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=danielemontecchi_laravel-scoped-settings&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=danielemontecchi_laravel-scoped-settings)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](LICENSE.md)
