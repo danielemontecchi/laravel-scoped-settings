@@ -1,11 +1,7 @@
 <?php
 
-//use Illuminate\Support\Facades\Artisan;
-//use Illuminate\Support\Facades\File;
-//use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
 use DanieleMontecchi\LaravelScopedSettings\Models\Setting;
-//use function Pest\Laravel\assertDatabaseMissing;
-//use function Pest\Laravel\assertDatabaseHas;
 
 beforeEach(function () {
     $settings = [
@@ -63,33 +59,48 @@ it('exports settings by scope type and ID', function () {
         ->assertExitCode(0);
 });
 
-//it('imports settings using --merge (default behavior)', function () {
-//    $exportPath = storage_path('app/settings/test_merge.json');
-//    File::put($exportPath, json_encode([
-//        ['group' => 'app', 'key' => 'name', 'value' => '"New App"'],
-//        ['group' => 'ui', 'key' => 'theme', 'value' => '"light"'],
-//    ]));
-//
-//    $this->artisan("settings:import {$exportPath} --merge")
-//        ->assertExitCode(0);
-//
-//    expect(Setting::count())->toBeGreaterThanOrEqual(4);
-//    assertDatabaseHas('settings', ['group' => 'app', 'key' => 'name', 'value' => '"New App"']);
-//    assertDatabaseHas('settings', ['group' => 'ui', 'key' => 'theme', 'value' => '"light"']);
-//});
-//
-//it('imports settings using --overwrite (clears all first)', function () {
-//    $exportPath = storage_path('app/settings/test_overwrite.json');
-//    File::put($exportPath, json_encode([
-//        ['group' => 'custom', 'key' => 'key', 'value' => '"overwritten"'],
-//    ]));
-//
-//    $this->artisan("settings:import {$exportPath} --overwrite")
-//        ->assertExitCode(0);
-//
-//    expect(Setting::count())->toBe(1);
-//    assertDatabaseHas('settings', ['group' => 'custom', 'key' => 'key', 'value' => '"overwritten"']);
-//});
+it('imports settings using --merge', function () {
+    $exportPath = storage_path('app/settings/test_merge.json');
+
+    File::ensureDirectoryExists(dirname($exportPath));
+    File::put($exportPath, json_encode([
+        ['group' => 'app', 'key' => 'name', 'value' => 'New App'],
+        ['group' => 'ui', 'key' => 'theme', 'value' => 'light'],
+    ]));
+
+    $this->artisan("settings:import {$exportPath} --merge")
+        ->assertExitCode(0)
+        ->expectsOutputToContain('Settings imported successfully');
+
+    expect(Setting::count())->toBeGreaterThanOrEqual(4);
+
+    $appName = Setting::where('group', 'app')->where('key', 'name')->first();
+    expect($appName)->not->toBeNull();
+    expect($appName->value)->toBe('New App');
+
+    $theme = Setting::where('group', 'ui')->where('key', 'theme')->first();
+    expect($theme)->not->toBeNull();
+    expect($theme->value)->toBe('light');
+});
+
+it('imports settings using --overwrite', function () {
+    $exportPath = storage_path('app/settings/test_overwrite.json');
+
+    File::ensureDirectoryExists(dirname($exportPath));
+    File::put($exportPath, json_encode([
+        ['group' => 'custom', 'key' => 'key', 'value' => 'overwritten'],
+    ]));
+
+    $this->artisan("settings:import {$exportPath} --overwrite")
+        ->assertExitCode(0)
+        ->expectsOutputToContain('Settings imported successfully');
+
+    expect(Setting::count())->toBe(1);
+
+    $custom = Setting::where('group', 'custom')->where('key', 'key')->first();
+    expect($custom)->not->toBeNull();
+    expect($custom->value)->toBe('overwritten');
+});
 
 it('fails to import from non-existing file', function () {
     $this->artisan('settings:import notfound.json')

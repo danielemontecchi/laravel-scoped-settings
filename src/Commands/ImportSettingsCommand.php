@@ -44,46 +44,43 @@ class ImportSettingsCommand extends Command
 
         $mode = $overwrite ? 'overwrite' : 'merge';
 
+        if ($mode === 'overwrite') {
+            Setting::query()->delete();
+        }
+
         DB::transaction(function () use ($data, $mode) {
             foreach ($data as $entry) {
                 if (!isset($entry['group'], $entry['key'], $entry['value'])) {
                     continue; // skip invalid entries
                 }
 
+                $scopeType = $entry['scope_type'] ?? null;
+                $scopeId = $entry['scope_id'] ?? null;
+
                 $query = Setting::query()
                     ->where('group', $entry['group'])
-                    ->where('key', $entry['key']);
-
-                if (isset($entry['scope_type'], $entry['scope_id'])) {
-                    $query->where('scope_type', $entry['scope_type'])
-                        ->where('scope_id', $entry['scope_id']);
-                } else {
-                    $query->whereNull('scope_type')->whereNull('scope_id');
-                }
+                    ->where('key', $entry['key'])
+                    ->where('scope_type', $scopeType)
+                    ->where('scope_id', $scopeId);
 
                 $existing = $query->first();
 
-                if ($mode === 'overwrite' && $existing) {
-                    $existing->delete();
-                    $existing = null;
+                if ($existing) {
+                    if ($mode === 'overwrite' || $mode === 'merge') {
+                        $existing->value = $entry['value'];
+                        $existing->save();
+                    }
+
+                    continue;
                 }
 
-                if (!$existing) {
-                    $normalized = collect($data)
-                        ->map(fn($item) => array_merge([
-                            'scope_type' => null,
-                            'scope_id' => null,
-                            'created_at' => now(),
-                            'updated_at' => now(),
-                        ], $item)
-                        );
-
-                    // Optionally split global and scoped, but not strictly necessary with this normalization
-                    Setting::insert($normalized->toArray());
-                } elseif ($mode === 'merge') {
-                    $existing->value = $entry['value'];
-                    $existing->save();
-                }
+                Setting::create([
+                    'scope_type' => $scopeType,
+                    'scope_id' => $scopeId,
+                    'group' => $entry['group'],
+                    'key' => $entry['key'],
+                    'value' => $entry['value'],
+                ]);
             }
         });
 

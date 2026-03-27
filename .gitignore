@@ -48,3 +48,6 @@ vendor-bin/
 
 .venv-docs/
 site/
+
+/.claude/
+*.code-workspace
