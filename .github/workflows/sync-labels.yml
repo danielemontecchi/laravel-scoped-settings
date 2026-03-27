@@ -1,7 +1,5 @@
 name: ♻️ Sync GitHub Labels
 
-description: Sync labels from `.github/labels.yml` into repository
-
 on:
   workflow_dispatch:
   push:
@@ -17,10 +15,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: 📅 Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
 
       - name: ♻️ Create or update labels
-        uses: EndBug/label-sync@v2
+        uses: EndBug/label-sync@52074158190acb45f3077f9099fea818aa43f97a
         with:
           config-file: .github/labels.yml
           delete-other-labels: true
