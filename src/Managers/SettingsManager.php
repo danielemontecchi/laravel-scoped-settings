@@ -42,7 +42,7 @@ class SettingsManager
      */
     public function get(string $key, mixed $default = null): mixed
     {
-        [$group, $key] = $this->parseKey($key);
+        list($group, $key) = $this->parseKey($key);
         $cacheKey = $this->getCacheKey("{$group}.{$key}");
 
         if (Cache::has($cacheKey)) {
@@ -81,7 +81,7 @@ class SettingsManager
      */
     public function set(string $key, mixed $value, ?int $ttl = null): void
     {
-        [$group, $key] = $this->parseKey($key);
+        list($group, $key) = $this->parseKey($key);
 
         Setting::query()->updateOrCreate(
             array_merge($this->getScopeConditions(), compact('group', 'key')),
@@ -103,7 +103,7 @@ class SettingsManager
      */
     public function forget(string $key): void
     {
-        [$group, $key] = $this->parseKey($key);
+        list($group, $key) = $this->parseKey($key);
 
         Setting::query()
             ->where($this->getScopeConditions())

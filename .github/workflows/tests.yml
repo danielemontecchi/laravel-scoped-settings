@@ -15,9 +15,9 @@ jobs:
         laravel: ['10.*', '11.*', '12.*', '13.*']
         exclude:
           - php: '8.1'
-            laravel: '13.*'  # Laravel 13 richiede PHP 8.2+
+            laravel: '13.*'
           - php: '8.3'
-            laravel: '10.*'  # Evita combinazioni non supportate
+            laravel: '10.*'
 
     steps:
       - name: Checkout code
